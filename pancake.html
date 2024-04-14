@@ -5,21 +5,27 @@
 </head>
 <body>
     <h1>Papa's Pancakeria</h1>
-    <!-- Asegúrate de que el div con id "flashContent" esté presente -->
-    <div id="flashContent">
-        <!-- Aquí es donde se mostrará el contenido Flash emulado por Ruffle -->
-    </div>
+    <!-- Aquí es donde se mostrará el contenido SWF emulado por Ruffle -->
+    <div id="ruffle"></div>
 
     <!-- Incluye el script de Ruffle -->
     <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
     <script>
-        // Lógica para cargar el archivo SWF una vez que se haya cargado la página
-        window.onload = function() {
-            // Ruffle necesita saber la ubicación del archivo SWF y el contenedor donde se debe emular
-            const container = document.getElementById('flashContent');
-            const swfUrl = 'papaspancakeria.swf'; // Reemplaza 'papaspancakeria.swf' con la ruta correcta a tu archivo SWF
-            RufflePlayer.replaceEmbeddedSWF(container, swfUrl);
-        };
+        var swfobject = {};
+
+        swfobject.embedSWF = function(url, cont, width, height){
+            var ruffle = window.RufflePlayer.newest(),
+                player = Object.assign(document.getElementById(cont).appendChild(ruffle.createPlayer()), {
+                    width: width,
+                    height: height,
+                    style: 'width: ' + width + 'px; height: ' + height + 'px',
+                });
+            
+            player.load({ url: url });
+        }
+
+        // Llama a la función embedSWF para cargar tu archivo SWF
+        swfobject.embedSWF('papaspancakeria.swf', 'ruffle', 500, 500); // Reemplaza 'papaspancakeria.swf' con el nombre de tu archivo SWF
     </script>
 </body>
 </html>
