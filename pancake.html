@@ -1,8 +1,19 @@
+<!DOCTYPE html>
 <html>
-    <body>
-        Papa's Pancakeria
-    </body>
- <script>
-   swf2js.load('papaspancakeria.swf');
- </script>
+<head>
+    <title>Papa's Pancakeria</title>
+    <script src="swf2js.js"></script>
+</head>
+<body>
+    <h1>Papa's Pancakeria</h1>
+    <!-- Asegúrate de que el div con id "flashContent" esté presente -->
+    <div id="flashContent"></div>
+
+    <script>
+        // Lógica para cargar el archivo SWF una vez que se haya cargado la página
+        window.onload = function() {
+            swf2js.load('papaspancakeria.swf', 'flashContent');
+        };
+    </script>
+</body>
 </html>
